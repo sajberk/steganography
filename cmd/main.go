@@ -16,31 +16,31 @@ func main() {
 	flag.Parse()
 
 	if *operation == "" {
-		fmt.Fprintf(os.Stderr, "Operation must be specified")
+		fmt.Fprintln(os.Stderr, "Operation must be specified")
 		return
 	}
 	if *carrierFile == "" {
-		fmt.Fprintf(os.Stderr, "Carrier file must be specified")
+		fmt.Fprintln(os.Stderr, "Carrier file must be specified")
 		return
 	}
 	if *dataFile == "" && *operation == "encode" {
-		fmt.Fprintf(os.Stderr, "Data file must be specified")
+		fmt.Fprintln(os.Stderr, "Data file must be specified")
 		return
 	}
 
 	switch *operation {
 	case "encode":
-		err := stego.Encode(&stego.StegoFile{CarrierFileName: *carrierFile, FileName: *dataFile})
+		err := stego.Encode(&stego.FileCarrier{CarrierFileName: *carrierFile, ResourceFileName: *dataFile})
 		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Fprintln(os.Stderr, err.Error())
 		}
 	case "decode":
-		err := stego.Decode(&stego.StegoFile{CarrierFileName: *carrierFile})
+		err := stego.Decode(&stego.FileCarrier{CarrierFileName: *carrierFile})
 		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Fprintln(os.Stderr, err.Error())
 		}
 	default:
-		fmt.Fprintf(os.Stderr, "Unsupported operation: %q", *operation)
+		fmt.Fprintf(os.Stderr, "Unsupported operation: %s", *operation)
 	}
 
 }

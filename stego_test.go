@@ -1,6 +1,6 @@
 /*
 @Time 2019-01-17 14:14
-@Author HANG
+@Author zhcppy
 
 */
 package stego
@@ -12,7 +12,7 @@ import (
 
 func TestEncode(t *testing.T) {
 
-	err := Encode(&StegoFile{CarrierFileName: "images/carrier.png", FileName: "images/ponyo.jpg"})
+	err := Encode(&FileCarrier{CarrierFileName: "images/carrier.png", ResourceFileName: "images/ponyo.jpg"})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
@@ -20,18 +20,18 @@ func TestEncode(t *testing.T) {
 
 func TestDecode(t *testing.T) {
 
-	err := Decode(&StegoFile{CarrierFileName: "images/new_carrier.png"})
+	err := Decode(&FileCarrier{CarrierFileName: "images/new_carrier.png"})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
 }
 
 func TestEncode_Decode_text(t *testing.T) {
-	err := Encode(&StegoText{CarrierFileName: "images/carrier.png", TextContent: "I like it"})
+	err := Encode(&TextCarrier{CarrierFileName: "images/carrier.png", TextContent: "I like it"})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
-	err = Decode(&StegoText{CarrierFileName: "images/new_carrier.png"})
+	err = Decode(&TextCarrier{CarrierFileName: "images/new_carrier.png"})
 	if err != nil {
 		t.Fatal(err.Error())
 	}
