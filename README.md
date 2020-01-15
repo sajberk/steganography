@@ -8,7 +8,7 @@ Why duplicate implementations, Because I want to hide any data in the image, not
 
 **This is just the beginning, I hope to get your advice**
 
-# Install
+## Install
     
     go get -v -u github.com/zhcppy/steganography
 
@@ -18,7 +18,7 @@ or
     
     make install
     
-# Extension
+## Extension
 
 Implementing interface about Steganography 
     
@@ -29,6 +29,4 @@ Implementing interface about Steganography
     }
     
     
-# [More about me](https://zhcppy.github.io)
-
-
+## About me(https://zhcppy.github.io)
