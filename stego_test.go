@@ -1,8 +1,3 @@
-/*
-@Time 2019-01-17 14:14
-@Author zhcppy
-
-*/
 package stego
 
 import (
