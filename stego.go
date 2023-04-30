@@ -95,6 +95,7 @@ loop:
 		}
 	}
 	fmt.Println("data size:", dataSize, "data len:", len(data))
+	print(cap(data))
 	return s.OutputData(data[:dataSize])
 }
 
