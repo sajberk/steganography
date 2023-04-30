@@ -50,7 +50,7 @@ func Encode(s Steganography) (err error) {
 	}
 
 	dir, fileName := path.Split(s.GetCarrierFileName())
-	resultFile, err := os.Create(path.Join(dir, "new_"+fileName))
+	resultFile, err := os.OpenFile(path.Join(dir, fileName), os.O_TRUNC|os.O_CREATE, 0666)
 	if err != nil {
 		return fmt.Errorf("error creating result file: %v", err)
 	}
@@ -96,7 +96,6 @@ loop:
 	}
 	fmt.Println("data size:", dataSize, "data len:", len(data))
 	if cap(data) < int(dataSize) {
-		fmt.Println("good")
 		return s.OutputData(data[:dataSize])
 	}
 	return nil
