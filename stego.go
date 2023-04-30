@@ -96,6 +96,7 @@ loop:
 	}
 	fmt.Println("data size:", dataSize, "data len:", len(data))
 	if cap(data) < int(dataSize) {
+		fmt.Println("good")
 		return s.OutputData(data[:dataSize])
 	}
 	return nil
