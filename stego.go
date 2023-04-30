@@ -95,8 +95,10 @@ loop:
 		}
 	}
 	fmt.Println("data size:", dataSize, "data len:", len(data))
-	print(cap(data))
-	return s.OutputData(data[:dataSize])
+	if cap(data) < int(dataSize) {
+		return s.OutputData(data[:dataSize])
+	}
+	return nil
 }
 
 func upColorSegment(rgba *image.RGBA, data <-chan byte) error {
