@@ -50,7 +50,7 @@ func Encode(s Steganography) (err error) {
 	}
 
 	dir, fileName := path.Split(s.GetCarrierFileName())
-	resultFile, err := os.OpenFile(path.Join(dir, fileName), os.O_TRUNC|os.O_CREATE, 0666)
+	resultFile, err := os.Create(path.Join(dir, "new_"+fileName))
 	if err != nil {
 		return fmt.Errorf("error creating result file: %v", err)
 	}
@@ -65,10 +65,10 @@ func Encode(s Steganography) (err error) {
 	}
 }
 
-func Decode(s Steganography) (err error) {
+func Decode(s Steganography) (message string, err error) {
 	rgba, _, err := getImageAsRGBA(s.GetCarrierFileName())
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	var data []byte
@@ -94,11 +94,11 @@ loop:
 			}
 		}
 	}
-	fmt.Println("data size:", dataSize, "data len:", len(data))
-	if cap(data) < int(dataSize) {
-		return s.OutputData(data[:dataSize])
+	//fmt.Println("data size:", dataSize, "data len:", len(data))
+	if dataSize > uint64(cap(data)) {
+		return "", nil
 	}
-	return nil
+	return string(data), nil
 }
 
 func upColorSegment(rgba *image.RGBA, data <-chan byte) error {
