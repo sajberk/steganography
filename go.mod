@@ -1,4 +1,4 @@
-module stego
+module github.com/sajberk/steganography
 
 go 1.20
 
