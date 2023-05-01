@@ -1,4 +1,4 @@
-module stego
+module steganography
 
 go 1.20
 
