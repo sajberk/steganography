@@ -50,7 +50,7 @@ func Encode(s Steganography) (err error) {
 	}
 
 	dir, fileName := path.Split(s.GetCarrierFileName())
-	resultFile, err := os.Create(path.Join(dir, "new_"+fileName))
+	resultFile, err := os.Create(path.Join(dir, fileName))
 	if err != nil {
 		return fmt.Errorf("error creating result file: %v", err)
 	}
